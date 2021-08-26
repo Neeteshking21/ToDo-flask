@@ -11,7 +11,7 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="position: fixed; width:100%;z-index: 800;">
         <div class="container-fluid">
           <a class="navbar-brand text-primary" href="#">OurToDo</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,58 +48,55 @@
         </div>
       </nav> 
       <!--  Form for ToDO list -->
-      <div class="container">
-        <form>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Topic</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-              
-            </div>
-            <div class="mb-3">
-                <div class="form-floating">
-                    <textarea class="form-control" style="height: 30vh;" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                    <label for="floatingTextarea">Write Notes here</label>
-                  </div>
-            </div>
-           
-            <button type="submit" class="btn btn-primary">Add ToDo</button>
-          </form>
+      <div class="mycontainer" style="position: absolute;top:10%; width: 100%;">
+        <div class="container">
+          <form action="/" method="POST"> 
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Topic</label>
+                <input type="text " class="form-control" id="exampleInputEmail1" name="title" aria-describedby="emailHelp">
+                
+              </div>
+              <div class="mb-3">
+                  <div class="form-floating">
+                      <textarea class="form-control" style="height: 30vh;" name="desc" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                      <label for="floatingTextarea">Write Notes here</label>
+                    </div>
+              </div>
+             
+              <button type="submit" class="btn btn-primary">Add ToDo</button>
+            </form>
+        </div>
+  
+        <!-- Table of ToDos -->
+  
+        <div class="container my-5">
+            <h1>Your ToDos</h1>
+          <table class="table my-3">
+              <thead>
+                <tr>
+                  <th scope="col">S.No</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for todo in allTodo %}
+                <tr>
+                  <th scope="row">{{todo.sno}}</th>
+                  <td>{{todo.title}}</td>
+                  <td>{{todo.desc}}</td>
+                  <td>{{todo.date_created}}</td>
+                  <td><button class="btn btn-danger">Delete</button></td>
+                  <td><button class="btn btn-primary">Edit</button></td>
+                </tr>
+                {% endfor %}
+               
+              </tbody>
+            </table>
+        </div>
       </div>
-
-      <!-- Table of ToDos -->
-
-      <div class="container my-5">
-          <h1>Your ToDos</h1>
-        <table class="table my-3">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-      </div>
+      
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
   </body>
