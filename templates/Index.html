@@ -71,6 +71,12 @@
   
         <div class="container my-5">
             <h1>Your ToDos</h1>
+            {%  if allTodo|length == 0 %}
+            <div class="alert alert-danger" role="alert">
+              No record found 😶
+            </div
+          {% else %}
+
           <table class="table my-3">
               <thead>
                 <tr>
@@ -81,17 +87,18 @@
                 </tr>
               </thead>
               <tbody>
+                   
                 {% for todo in allTodo %}
                 <tr>
-                  <th scope="row">{{todo.sno}}</th>
+                  <th scope="row">{{loop.index}}</th>
                   <td>{{todo.title}}</td>
                   <td>{{todo.desc}}</td>
                   <td>{{todo.date_created}}</td>
-                  <td><button class="btn btn-danger">Delete</button></td>
-                  <td><button class="btn btn-primary">Edit</button></td>
+                  <td><a href="/delete/{{todo.sno}}" type="button" class="btn btn-danger">Delete</button></td>
+                  <td><a href="/update/{{todo.sno}}" type="button" class="btn btn-primary">Edit</button></td>
                 </tr>
                 {% endfor %}
-               
+                {% endif %}
               </tbody>
             </table>
         </div>
