@@ -27,16 +27,27 @@ def hello_world():
     # print(allTodo)
     return render_template('Index.html', allTodo = allTodo)
 
-@app.route("/update/<int:sno>")
-def update():
-    return 'Update'
+@app.route("/update/<int:sno>", methods=['GET', 'POST'])
+def update(sno):
+    if request.method == 'POST':
+        title = request.form['title']
+        desc = request.form['desc']
+        todo = Todo.query.filter_by(sno = sno).first()
+        todo.title = title
+        todo.desc = desc
+        db.session.add(todo)
+        db.session.commit()
+        return redirect('/')
+        
+    todo = Todo.query.filter_by(sno = sno).first()
+    return render_template('update.html', todo = todo)
 
 @app.route("/delete/<int:sno>")
 def delete(sno):
     todo = Todo.query.filter_by(sno = sno).first()
     db.session.delete(todo)
     db.session.commit()
-    return redirect('/')
+    return  redirect('/')
 
 if __name__ == "__main__":  
     app.run(debug=True)

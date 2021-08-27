@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+Update
+{% endblock title %}
+{% block body %}
+  
+      <!--  Form for ToDO list -->
+      <div class="mycontainer" style="position: absolute;top:10%; width: 100%;">
+        <h1 style="margin-left:6vw;">Update Todo</h1><br>
+        <div class="container">
+          <form action="/update/{{todo.sno}}" method="POST"> 
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Topic</label>
+                <input type="text " class="form-control" id="exampleInputEmail1" value={{todo.title}} name="title" aria-describedby="emailHelp">
+                
+              </div>
+              <div class="mb-3">
+                  <div class="form-floating">
+                      <input type="text" class="form-control"  value='{{todo.desc}}' name="desc" placeholder="Leave a comment here" id="floatingTextarea"></input>
+                      <!-- <label for="floatingTextarea">Write Notes here</label> -->
+                    </div>
+              </div>
+             
+              <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+{% endblock body %}
